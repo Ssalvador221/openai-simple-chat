@@ -17,13 +17,15 @@ func main() {
 		log.Fatal("Error ao carregar variavel!")
 	}
 
-	c := openai.NewClient(os.Getenv("OPENAI_API_KEY"))
+	c := openai.NewOpenAIClient(os.Getenv("OPENAI_API_KEY"))
 	ctx := context.Background()
 
-	resp, err := chat.SimplePrompt("Bom dia", ctx, c.Client)
+	resp, err := chat.SimpleOpenAIPrompt("Bom dia", ctx, c.Client)
 	if err != nil {
 		fmt.Errorf("Error %v", err)
 	}
+
+	
 
 	fmt.Println(resp)
 }

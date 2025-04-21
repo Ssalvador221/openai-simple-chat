@@ -8,7 +8,7 @@ type Client struct {
 	*openai.Client
 }
 
-func NewClient(apiKey string) *Client {
+func NewOpenAIClient(apiKey string) *Client {
 	client := openai.NewClient(apiKey)
 
 	return &Client{
