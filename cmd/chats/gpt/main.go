@@ -1,31 +1,39 @@
 package main
 
 import (
-	"chat-ia-go/internal/chat"
-	"chat-ia-go/internal/openai"
-	"context"
+	"bufio"
 	"fmt"
-	"log"
 	"os"
-
-	"github.com/joho/godotenv"
 )
 
+func Error(err error) error {
+	if err != nil {
+		return err
+	}
+	return nil
+}
+
 func main() {
-	err := godotenv.Load()
-	if err != nil {
-		log.Fatal("Error ao carregar variavel!")
-	}
+	reader := bufio.NewReader(os.Stdin)
 
-	c := openai.NewOpenAIClient(os.Getenv("OPENAI_API_KEY"))
-	ctx := context.Background()
+	input, err := reader.ReadString('\n')
+	Error(err)
+	fmt.Println(input)
+	/*
+		 	err := godotenv.Load()
+			if err != nil {
+				log.Fatal("Error ao carregar variavel!")
+			}
 
-	resp, err := chat.SimpleOpenAIPrompt("Bom dia", ctx, c.Client)
-	if err != nil {
-		fmt.Errorf("Error %v", err)
-	}
+			c := openai.NewOpenAIClient(os.Getenv("OPENAI_API_KEY"))
+			ctx := context.Background()
 
-	
+			resp, err := chat.SimpleOpenAIPrompt("Bom dia", ctx, c.Client)
+			if err != nil {
+				fmt.Errorf("Error %v", err)
+			}
 
-	fmt.Println(resp)
+
+			fmt.Println(resp)
+	*/
 }
